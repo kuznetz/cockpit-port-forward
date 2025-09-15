@@ -1,0 +1,25 @@
+{
+  "name": "cockpit-port-forward",
+  "version": "1.0.0",
+  "description": "Cockpit plugin for managing firewalld port forwards",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "development": "webpack serve --mode=development"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/preset-react": "^7.22.0",
+    "babel-loader": "^9.1.0",
+    "copy-webpack-plugin": "^13.0.1",
+    "css-loader": "^6.8.0",
+    "mini-css-extract-plugin": "^2.9.4",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

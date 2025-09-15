@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "tools": {
+    "port-forward": {
+      "label": "Port Forwards",
+      "path": ""
+    }
+  }
+}
