@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Panel, PanelMain, PanelMainBody, PanelHeader,
   Card, CardTitle, CardBody,
-  Title, Switch
+  Title, Switch, Alert, AlertActionCloseButton
 } from '@patternfly/react-core';
 
 import FirewalldAPI from 'firewalld-api';
@@ -50,16 +50,11 @@ const App = () => {
             <div style={{ display:'flex', flexDirection: 'column', 'gap': '0.5rem'}} >
 
                 {error && (
-                    <div className="alert alert-danger">
-                        {error}
-                        <button 
-                            type="button" 
-                            className="close" 
-                            onClick={() => setError('')}
-                        >
-                            &times;
-                        </button>
-                    </div>
+                    <Alert variant="warning" title="Error"
+                      actionClose={<AlertActionCloseButton onClose={() => setError('')} />}
+                    >
+                        <p>{error}</p>
+                    </Alert>
                 )}
 
                 { loading && <LoadingSpinner /> }

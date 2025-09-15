@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Select, SelectOption, SelectList } from '@patternfly/react-core';
+import { Button, TextInput, ValidatedOptions, FormSelect, FormSelectOption } from '@patternfly/react-core';
 
 const protocols = ['tcp','udp','sctp','dccp']
 
@@ -11,6 +11,13 @@ const PortForwardEditRow = ({ row, onSubmit }) => {
         toport: row? row[2] : '',
         toaddr: row? row[3] : '',
     });
+
+    const portValid = (port) => {
+        if (!port) return false
+        let p = parseInt(port)
+        if (isNaN(p) || p < 1 || p > 65535 ) return false
+        return true
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,18 +34,18 @@ const PortForwardEditRow = ({ row, onSubmit }) => {
     return (
         <tr className="pf-v6-c-table__tr">
             <td>
-                <input
-                    type="text"
+                <TextInput
                     name="port"
                     value={formData.port}
                     onChange={handleChange}
-                    placeholder="80"
-                    required
-                    className="form-control"
+                    placeholder=""
+                    isRequired
+                    validated={portValid(formData.port) ? null : ValidatedOptions.error}
+                    type="text"                    
                 />
             </td>
             <td>
-                <select
+                {/*<!--select
                     name="protocol"
                     value={formData.protocol}
                     onChange={handleChange}
@@ -48,32 +55,36 @@ const PortForwardEditRow = ({ row, onSubmit }) => {
                     <option>udp</option>
                     <option>sctp</option>
                     <option>dccp</option>
-                </select>                
+                </select-->*/}
+                <FormSelect name="protocol" value={formData.protocol} onChange={handleChange}>
+                {protocols.map((option, index) => (
+                    <FormSelectOption key={index} value={option} label={option} />
+                ))}
+                </FormSelect>                
             </td>
             <td>
-                <input
-                    type="text"
+                <TextInput
                     name="toport"
                     value={formData.toport}
                     onChange={handleChange}
-                    placeholder="8080"
-                    required
-                    className="form-control"
+                    placeholder=""
+                    isRequired
+                    validated={portValid(formData.toport) ? null : ValidatedOptions.error}
+                    type="text"
                 />
             </td>
             <td>
-                <input
+                <TextInput
                     type="text"
                     name="toaddr"
                     value={formData.toaddr}
                     onChange={handleChange}
-                    placeholder="192.168.1.100"
-                    className="form-control"
+                    placeholder=""
                 />
             </td>
             <td style={{textAlign:'right'}}>
                 <Button
-                    variant="primary" size="sm"
+                    variant="primary"
                     onClick={(e)=>handleSubmit(e)}
                 >
                     {row ? 'Update' : 'Add'}
