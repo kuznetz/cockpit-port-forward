@@ -14,9 +14,9 @@ const PortForwardsTable = ({ api, zone, onReload }) => {
             const newRowArr = [newRow.port, newRow.protocol, newRow.toport, newRow.toaddr]
             if (editIndex !== -1) {
                 let oldRow = zone.forward_ports[editIndex]
-                await api.removePortForward(zone.name, oldRow)
+                await api.removePortForward(zone, oldRow)
             }
-            await api.addPortForward(zone.name, newRowArr)
+            await api.addPortForward(zone, newRowArr)
             await onReload()
 
         } catch(e) {
@@ -28,7 +28,7 @@ const PortForwardsTable = ({ api, zone, onReload }) => {
     const handleRemoveForward = async (forward) => {
         if (!window.confirm('Are you sure you want to remove this port forward?'))
             return
-        await api.removePortForward(zone.name, forward)
+        await api.removePortForward(zone, forward)
         await onReload()
     } 
 

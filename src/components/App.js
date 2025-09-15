@@ -30,7 +30,7 @@ const App = () => {
 
     const toggleMasquerade = async (zone) => {
         try {
-            await api.setMasquare(zone.name, !zone.masquerade);
+            await api.setMasquare(zone, !zone.masquerade);
             await loadZones();
         } catch (error) {
             setError('Failed to toggle masquerade: ' + error.message);
