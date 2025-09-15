@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Select, SelectOption, SelectList } from '@patternfly/react-core';
+
+const protocols = ['tcp','udp','sctp','dccp']
 
 const PortForwardEditRow = ({ row, onSubmit }) => {
+    const [isOpen, setIsOpen] = useState(false)
     const [formData, setFormData] = useState({
         port: row? row[0] : '',
         protocol: row? row[1] : 'tcp',
@@ -38,7 +42,7 @@ const PortForwardEditRow = ({ row, onSubmit }) => {
                     name="protocol"
                     value={formData.protocol}
                     onChange={handleChange}
-                    className="form-control"
+                    style={{'height': '1.8rem'}}
                 >
                     <option>tcp</option>
                     <option>udp</option>

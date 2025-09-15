@@ -7,13 +7,13 @@ Unfortunately, the default firewall settings do not have port forwarding and mas
 ## Key Features
 
 - **Masquerading**:
-  - Toggle IP Masquerading ON or OFF
+  - Toggle IP masquerading ON or OFF
   - Masquerading required for port forwarding to work correctly
+
 - **Port Forward Operations**: 
   - Add new port forwarding rules
   - Edit existing rules
   - Remove rules with confirmation
-  - Port-to-port forwarding
   - Optional destination address specification
 
 ## Technical Details
@@ -21,6 +21,10 @@ Unfortunately, the default firewall settings do not have port forwarding and mas
 - **Framework**: Built with React.js (v18+) for a modern, component-based UI
 - **Communication**: Uses D-Bus to interact with firewalld service
 - **Privileges**: Requires superuser access for firewall modifications
+
+## Using prebuild release
+
+Just copy files from archive to directory `/usr/local/share/cockpit/port-forward`
 
 ## Building
 

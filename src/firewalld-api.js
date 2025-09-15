@@ -11,9 +11,9 @@ class FirewalldAPI {
     async getZones() {
         try {
             let zoneNames = await this.dbus.call(
-                '/org/fedoraproject/FirewallD1',
-                `org.fedoraproject.FirewallD1.zone`,
-                'getActiveZones',//'getZones',
+                '/org/fedoraproject/FirewallD1/config',
+                `org.fedoraproject.FirewallD1.config`,
+                'listZones',//'getZones',
                 []
             )
             zoneNames = zoneNames[0]
@@ -49,58 +49,32 @@ class FirewalldAPI {
                 })
             }
 
-            console.log('return zones', zones)
+            //console.log('return zones', zones)
             return zones;
         } catch (error) {
-            console.error('Error getting zones:', error);
+            //console.error('Error getting zones:', error);
             throw error;
         }
     }
 
-    /*
-let dbus = cockpit.dbus('org.fedoraproject.FirewallD1', { 
-    bus: 'system', 
-    superuser: 'require' 
-})
-org.fedoraproject.FirewallD1.config getZoneByName
-dbus.call('/org/fedoraproject/FirewallD1/config',
-                           'org.fedoraproject.FirewallD1.config',
-                           'getZoneByName', ["external"])
-await dbus.call('/org/fedoraproject/FirewallD1/config/zone/4',
-                           'org.fedoraproject.FirewallD1.config.zone',
-                           'getSettings2', []) //getForwardPorts
-    */
-
-    async getPortForwards(zone) {
-        try {
-            const proxy = await this.dbus.proxy();
-            const zonePath = await proxy.getZoneByName(zone);
-            const zoneProxy = cockpit.dbus('org.fedoraproject.FirewallD1', {
-                bus: 'system',
-                path: zonePath[0],
-                superuser: 'require'
-            });
-            
-            const zoneObj = await zoneProxy.proxy();
-            const forwards = await zoneObj.getPortForwards();
-            return forwards[0];
-        } catch (error) {
-            console.error('Error getting port forwards:', error);
-            throw error;
-        }
+    async setMasquare(zone, enabled) {
+        await this.dbus.call(
+            '/org/fedoraproject/FirewallD1',
+            `org.fedoraproject.FirewallD1.zone`,
+            'getActiveZones',//'getZones',
+            []
+        )
     }
 
     async addPortForward(zone, forward) {
         try {
-            const proxy = await this.dbus.proxy();
-            const zonePath = await proxy.getZoneByName(zone);
-            const zoneProxy = cockpit.dbus('org.fedoraproject.FirewallD1', {
-                bus: 'system',
-                path: zonePath[0],
-                superuser: 'require'
-            });
-            
-            const zoneObj = await zoneProxy.proxy();
+            await this.dbus.call(
+                '/org/fedoraproject/FirewallD1',
+                `org.fedoraproject.FirewallD1.zone`,
+                'getActiveZones',//'getZones',
+                []
+            )
+
             await zoneObj.addPortForward(
                 forward.port,
                 forward.protocol,

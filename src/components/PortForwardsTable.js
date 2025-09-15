@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import PortForwardEditRow from './PortForwardEditRow'
+import {
+  Table
+} from '@patternfly/react-table';
 
 const PortForwardsTable = ({ api, zone, onReload }) => {
     const [editIndex, setEditIndex] = useState(-1)
@@ -30,7 +33,8 @@ const PortForwardsTable = ({ api, zone, onReload }) => {
     } 
 
     return (
-        <table className="table" border="1">
+        //role="grid" class="page-table pf-v6-c-table pf-m-grid-md pf-m-compact"
+        <Table variant='compact' borders={true} style={{marginTop:  '10px'}}>
             <thead>
                 <tr>
                     <th width="100">Src Port</th>
@@ -80,7 +84,7 @@ const PortForwardsTable = ({ api, zone, onReload }) => {
                     </tr>
                 }
             </tbody>
-        </table>
+        </Table>
     );
 };
 

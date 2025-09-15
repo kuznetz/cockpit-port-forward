@@ -1,16 +1,11 @@
-html {
-    font-family: "Red Hat Text", "RedHatText", "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans JP", "Noto Sans KR", "Noto Sans Malayalam", "Noto Sans SC", "Noto Sans TC", "Noto Sans Thai", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-}
-
-h2 {
+/*h2 {
     margin: 0 0 1rem 0;
     line-height: 1.2;
-}
+}*/
 
-th,td {
+/*th,td {
     padding: 5px;
-}
+}*/
 
 .spinner-container {
     text-align: center;
@@ -30,32 +25,4 @@ th,td {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-.modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    min-width: 400px;
-}
-
-.button-group {
-    margin-top: 20px;
-}
-
-.button-group button {
-    margin-right: 10px;
 }

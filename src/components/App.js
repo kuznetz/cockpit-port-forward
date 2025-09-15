@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import {
+  Panel, PanelMain, PanelMainBody, PanelHeader,
+  Card, CardTitle, CardBody,
+  Title, Switch
+} from '@patternfly/react-core';
+
 import FirewalldAPI from 'firewalld-api';
 import LoadingSpinner from './LoadingSpinner';
 import PortForwardsTable from './PortForwardsTable';
@@ -36,38 +42,47 @@ const App = () => {
     }, [])
 
     return (
-        <div className="container-fluid">
-            <div className="page-header">
-                <h2>Firewalld Port Forward</h2>
-            </div>
+        <Panel>
+            <PanelHeader>
+                <Title headingLevel="h1" size="lg">Firewalld Port Forward</Title>
+            </PanelHeader>
+            <PanelMain><PanelMainBody>
+            <div style={{ display:'flex', flexDirection: 'column', 'gap': '0.5rem'}} >
 
-            {error && (
-                <div className="alert alert-danger">
-                    {error}
-                    <button 
-                        type="button" 
-                        className="close" 
-                        onClick={() => setError('')}
-                    >
-                        &times;
-                    </button>
-                </div>
-            )}
-
-            { loading && <LoadingSpinner /> }
-            { !loading && zones.map(zone => (
-                <div key={zone.name} style={{'marginBottom': '1rem'}}>
-                    <h2>Zone {zone.short}</h2>
-                    <div>
-                        <button type="button" style={{ 'marginRight':'5px' }} onClick={() => toggleMasquerade(zone)}>
-                            { zone.masquerade? 'ON' : 'OFF' }
-                        </button>                        
-                        Masquerading (required for port forwarding to work correctly)
+                {error && (
+                    <div className="alert alert-danger">
+                        {error}
+                        <button 
+                            type="button" 
+                            className="close" 
+                            onClick={() => setError('')}
+                        >
+                            &times;
+                        </button>
                     </div>
-                    { (zone.masquerade)? <PortForwardsTable api={api} zone={zone} onReload={loadZones} />: null }
-                </div>
-            ))}
-        </div>
+                )}
+
+                { loading && <LoadingSpinner /> }
+                { !loading && zones.map(zone => (
+                    <Card key={zone.name}>
+                        <CardTitle>
+                            <Title headingLevel="h2" size="lg">Zone {zone.short}</Title>
+                        </CardTitle>
+                        <CardBody>
+                            <div>
+                                <Switch
+                                    isChecked={zone.masquerade}
+                                    onChange={() => toggleMasquerade(zone)}                                
+                                    label="Masquerading (required for port forwarding to work correctly)"
+                                />
+                            </div>
+                            { (zone.masquerade)? <PortForwardsTable api={api} zone={zone} onReload={loadZones} />: null }
+                        </CardBody>
+                    </Card>
+                ))}
+            </div>
+            </PanelMainBody></PanelMain>
+        </Panel>
     );
 };
 
