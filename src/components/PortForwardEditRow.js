@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Select, SelectOption, SelectList } from '@patternfly/react-core';
+import { Button, Select, SelectOption, SelectList } from '@patternfly/react-core';
 
 const protocols = ['tcp','udp','sctp','dccp']
 
@@ -25,7 +25,7 @@ const PortForwardEditRow = ({ row, onSubmit }) => {
     };
 
     return (
-        <tr>
+        <tr className="pf-v6-c-table__tr">
             <td>
                 <input
                     type="text"
@@ -71,10 +71,13 @@ const PortForwardEditRow = ({ row, onSubmit }) => {
                     className="form-control"
                 />
             </td>
-            <td>
-                <button onClick={(e)=>handleSubmit(e)} className="btn btn-primary">
+            <td style={{textAlign:'right'}}>
+                <Button
+                    variant="primary" size="sm"
+                    onClick={(e)=>handleSubmit(e)}
+                >
                     {row ? 'Update' : 'Add'}
-                </button>                
+                </Button>                
             </td>
         </tr>
     );
