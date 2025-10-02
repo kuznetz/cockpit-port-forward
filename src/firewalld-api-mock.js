@@ -115,6 +115,10 @@ class FirewalldAPI {
     async setMasquare(zone, enabled) {
         console.log('MOCK setMasquare', zone, enabled)
     }
+
+    async reload() {
+        console.log('MOCK reload')
+    }
 }
 
 export default FirewalldAPI;

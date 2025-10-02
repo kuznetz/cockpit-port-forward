@@ -16,6 +16,7 @@ const PortForwardsTable = ({ api, zone, onReload }) => {
                 await api.removePortForward(zone, oldRow)
             }
             await api.addPortForward(zone, newRowArr)
+            await api.reload()
             await onReload()
 
         } catch(e) {
@@ -28,6 +29,7 @@ const PortForwardsTable = ({ api, zone, onReload }) => {
         if (!window.confirm('Are you sure you want to remove this port forward?'))
             return
         await api.removePortForward(zone, forward)
+        await api.reload()
         await onReload()
     } 
 

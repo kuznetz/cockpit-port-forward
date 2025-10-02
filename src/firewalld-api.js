@@ -91,6 +91,15 @@ class FirewalldAPI {
         )
     }
 
+    async reload() {
+        await this.dbus.call(
+            '/org/fedoraproject/FirewallD1',
+            `org.fedoraproject.FirewallD1`,
+            'reload',
+            []
+        )        
+    }
+
 }
 
 export default FirewalldAPI;
