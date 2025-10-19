@@ -20,7 +20,10 @@ const App = () => {
         setLoading(true);
         try {
             const zoneList = await api.getZones();
-            setZones(zoneList);
+            const sortedZones = zoneList.sort((a, b) => {
+                return Number(b.masquerade) - Number(a.masquerade)
+            })        
+            setZones(sortedZones)
         } catch (error) {
             setError('Failed to load zones: ' + error.message);
         } finally {
