@@ -50,10 +50,10 @@ const PortForwardsTable = ({ api, zone, onReload }) => {
                     (editIndex === index ?
                         <PortForwardEditRow key={index} row={forward} onSubmit={(row) => handleFormSubmit(row)} />:
                         <tr className="pf-row pf-v6-c-table__tr" key={index}>
-                            <td onClick={() => setEditIndex(index)}>{forward[0]}</td>
-                            <td onClick={() => setEditIndex(index)}>{forward[1]}</td>
-                            <td onClick={() => setEditIndex(index)}>{forward[2]}</td>
-                            <td onClick={() => setEditIndex(index)}>{forward[3] || 'localhost'}</td>
+                            <td>{forward[0]}</td>
+                            <td>{forward[1]}</td>
+                            <td>{forward[2]}</td>
+                            <td>{forward[3] || 'localhost'}</td>
                             <td style={{textAlign:'right'}}>
                                 <Button
                                     variant="secondary" size="sm"
