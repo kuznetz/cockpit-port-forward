@@ -1,5 +1,7 @@
 # Cockpit Port Forward Manager
 
+![Screenshot](screenshot.jpg)
+
 This plugin provides a UI within the Cockpit web console for managing firewalld port forwarding rules. It allows system administrators to easily view, add, edit, and remove port forwarding rules without needing to use command-line tools.
 
 Unfortunately, the default firewall settings do not have port forwarding and masquerading, this UI complements the functionality of the cockpit.
